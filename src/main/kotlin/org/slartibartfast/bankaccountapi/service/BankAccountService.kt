@@ -22,9 +22,10 @@ class BankAccountService(
 
     fun createBankAccount(owner: String): BankAccountDto {
         loggerComp.info("bank account will be created for {}", owner)
-        val id = Random.nextInt()
+        val id = Random.nextInt(10000, 100000000)
         val accountNumber = bankAccountNumberService.generateBankAccountNumber(id)
         val bankAccount = prepareBankAccount(id, accountNumber, owner)
+        loggerComp.info("bank account saved with {}", id)
         return bankAccountRepository.save(bankAccount).toDto()
     }
 
