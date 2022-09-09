@@ -4,7 +4,7 @@ import org.slartibartfast.bankaccountapi.model.dto.BankAccountDto
 import java.math.BigDecimal
 
 data class BankAccount(
-    var id: Int?,
+    var id: Int,
     var accountNum: String,
     var ownerName: String,
     var balance: BigDecimal,

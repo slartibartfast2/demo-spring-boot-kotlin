@@ -43,19 +43,16 @@ class BankAccountNumberService {
     }
 
     fun generateBankAccountNumber(input: Int) : String {
-        var mutableInput = input
-        val encodedString = StringBuilder()
-        if (mutableInput == 0) {
-            return allowedCharacters[0]
-        }
-        while (mutableInput > 0) {
-            val key = allowedCharacters[mutableInput % allowedCharsLength]
-            encodedString.append(allowedCharsMap[key])
-            mutableInput /= allowedCharsLength
-        }
+        val bankAccountNumber = StringBuilder().apply {
+            var mutableInput = input
+            while (mutableInput > 0) {
+                val key = allowedCharacters[mutableInput % allowedCharsLength]
+                this.append(allowedCharsMap[key])
+                mutableInput /= allowedCharsLength
+            }
+        }.reverse().toString().padStart(16, '0')
 
-        val bankAccountNumber = encodedString.reverse().toString()
         loggerComp.info("new bank account number generated, {}", bankAccountNumber)
-        return bankAccountNumber.padStart(16, '0')
+        return bankAccountNumber
     }
 }

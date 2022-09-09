@@ -26,7 +26,7 @@ class BankAccountService(
         val accountNumber = bankAccountNumberService.generateBankAccountNumber(id)
         val bankAccount = prepareBankAccount(id, accountNumber, owner)
         loggerComp.info("bank account saved with {}", id)
-        return bankAccountRepository.save(bankAccount).toDto()
+        return bankAccountRepository.save(bankAccount)
     }
 
     private fun prepareBankAccount(id: Int, accountNumber: String, owner: String): BankAccount {
